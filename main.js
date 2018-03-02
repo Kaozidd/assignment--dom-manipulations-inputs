@@ -55,8 +55,32 @@ document.querySelector("#select-to-show-more button").addEventListener('click',f
   mpg.textContent = selected.getAttribute("data-mpg");
   edmunds.textContent = selected.getAttribute("data-edmunds");
 })
-let input = document.querySelector("#add-guest input");
-let list = document.querySelector("#add-guest .guest-list");
-input.addEventListener("submit", function(){
-	console.log(input);
+
+document.querySelector("#add-guest input").addEventListener("keypress", function(e){
+	if (e.keyCode === 13) {
+		var node = document.createElement("li");
+		var textContent = (this.value);
+		node.textContent = textContent;
+		node.classList = "guest";
+		document.querySelector("#add-guest .guest-list").appendChild(node);
+		this.value = "";
+	}
+})
+
+document.querySelector("#add-item-bonus input").addEventListener("keypress", function(e){
+	if (e.keyCode === 13) {
+		var node = document.createElement("li");
+		node.classList = "item";
+		var textContent = (this.value);
+		node.textContent = textContent;
+		var button = document.createElement("button");
+		button.classList = "remove";
+		button.textContent = "X";
+		node.appendChild(button);
+		button.addEventListener('click', function(){
+			button.parentNode.remove();
+		})
+		document.querySelector("#add-item-bonus .guest-list").appendChild(node);
+		this.value = "";
+	}
 })
